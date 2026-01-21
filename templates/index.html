@@ -132,6 +132,7 @@
                 .then(result => {
                     items.push(result);
                     renderItem(result);
+                    input.value = '';
                 })
                 .catch(error => {
                     console.error('Error ', error);
