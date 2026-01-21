@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список задач</title>
+    <style>
+        #todo {
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .todo__text {
+            width: 100%;
+            padding: 4px;
+        }
+
+        .todo__list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .todo__item {
+            width: 100%;
+            display: flex;
+            gap: 8px;
+            border: 1px solid #cecece;
+            padding: 4px;
+        }
+
+        .todo__description {
+            flex: 1;
+        }
+
+        .todo__item.completed .todo__description {
+            opacity: 0.7;
+        }
+
+        .todo__item.completed .todo__complete {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="todo">
+    <input type="text" class="todo__text" name="description">
+    <button class="todo__send">Добавить</button>
+    <div class="todo__list"></div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const token = '#CSRF#';
+        const app = document.getElementById('todo');
+        const input = app.querySelector('.todo__text');
+        const send = app.querySelector('.todo__send');
+        const list = app.querySelector('.todo__list');
+
+        let items = [];
+
+        const renderItem = item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('todo__item');
+
+            const description = document.createElement('div');
+            description.classList.add('todo__description');
+            description.innerHTML = item.description;
+            itemDiv.appendChild(description);
+
+            if (item.completed) {
+                itemDiv.classList.add('completed');
+            } else {
+                const button = document.createElement('button');
+                button.classList.add('todo__complete');
+                button.innerText = 'Выполнено';
+                button.dataset.id = item.id;
+                itemDiv.appendChild(button);
+            }
+
+            const button = document.createElement('button');
+            button.classList.add('todo__delete');
+            button.innerText = 'Удалить';
+            button.dataset.id = item.id;
+            itemDiv.appendChild(button);
+
+            list.appendChild(itemDiv);
+        }
+
+        const render = () => {
+            list.replaceChildren();
+            items.map(renderItem);
+        }
+
+        const load = () => {
+            fetch('/todo')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    items = result;
+                    render();
+                })
+                .catch(error => {
+                    console.error('Error ', error);
+                })
+        }
+
+        const post = () => {
+            const description = input.value;
+            if (description.length < 4) {
+                return;
+            }
+            const formData = new FormData();
+            formData.append('description', description);
+            formData.append('csrf_token', token);
+            fetch('/todo', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    items.push(result);
+                    renderItem(result);
+                })
+                .catch(error => {
+                    console.error('Error ', error);
+                })
+        }
+
+        const complete = event => {
+            if (event.target.matches('button.todo__complete[data-id]')) {
+                const id = parseInt(event.target.dataset.id);
+                fetch('/todo/' + id, {
+                    method: 'PATCH',
+                    headers: {
+                        'X-Csrf-Token': token
+                    }
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error '.response.status);
+                        }
+                        event.target.closest('.todo__item').classList.add('completed');
+                    })
+                    .catch(error => {
+                        console.error('Error ', error);
+                    })
+            }
+        }
+        const remove = event => {
+            if (event.target.matches('button.todo__delete[data-id]')) {
+                const id = parseInt(event.target.dataset.id);
+                fetch('/todo/' + id, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-Csrf-Token': token
+                    }
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error '.response.status);
+                        }
+                        event.target.closest('.todo__item').remove();
+                    })
+                    .catch(error => {
+                        console.error('Error ', error);
+                    })
+            }
+        }
+
+        list.addEventListener('click', remove);
+        list.addEventListener('click', complete);
+        send.addEventListener('click', post);
+        load();
+    });
+</script>
+</body>
+</html>

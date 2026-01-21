@@ -1,0 +1,66 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "6418c2f244132f333d18a9fbc4eb5eec",
+    "packages": [
+        {
+            "name": "voral/joke",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Voral/joke.git",
+                "reference": "e7e9531563ce4aff4cc5b704f6fbe914d1d6d438"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Voral/joke/zipball/e7e9531563ce4aff4cc5b704f6fbe914d1d6d438",
+                "reference": "e7e9531563ce4aff4cc5b704f6fbe914d1d6d438",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.4"
+            },
+            "require-dev": {
+                "php-mock/php-mock-phpunit": "^2.14",
+                "phpunit/phpunit": "^12.5",
+                "voral/version-increment": "^3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Vasoft\\Joke\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Vorobyev",
+                    "email": "voral.adm@gmail.com"
+                }
+            ],
+            "description": "A minimal PHP microframework with manual routing and dependency injection container.",
+            "support": {
+                "issues": "https://github.com/Voral/joke/issues",
+                "source": "https://github.com/Voral/joke/tree/v1.1.0"
+            },
+            "time": "2026-01-20T14:13:11+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {},
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": "^8.4"
+    },
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
+}

@@ -1,0 +1,9 @@
+./vendor
+*.log
+.DS_Store
+/.idea
+/.nova
+/.vscode
+/.zed
+Thumbs.db
+/data/todos.json
