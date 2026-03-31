@@ -24,7 +24,7 @@
 ## Быстрый старт
 
 ```bash
-git clone https://github.com/joke-php/joke-example-todo.git
+git clone https://github.com/joke-php/example-todo.git
 cd joke-example-todo
 composer install 
 composer run dev
