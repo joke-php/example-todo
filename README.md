@@ -25,7 +25,7 @@
 
 ```bash
 git clone https://github.com/joke-php/example-todo.git
-cd joke-example-todo
+cd example-todo
 composer install 
 composer run dev
 ```
