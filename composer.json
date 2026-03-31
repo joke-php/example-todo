@@ -1,5 +1,5 @@
 {
-  "name": "voral/joke-example-todo",
+  "name": "joke-php/example-todo",
   "description": "A minimal todo-list example app showcasing the Joke PHP microframework",
   "type": "project",
   "require": {
