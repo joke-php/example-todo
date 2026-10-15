@@ -1,9 +1,8 @@
 <?php
 
 use App\Controllers\TodoController;
-use Vasoft\Joke\Core\Response\HtmlResponse;
-use Vasoft\Joke\Core\Response\ResponseStatus;
-use Vasoft\Joke\Core\Routing\Router;
+use Vasoft\Joke\Http\Response\ResponseBuilder;
+use Vasoft\Joke\Http\Response\ResponseStatus;
 
 /**
  * @var Router $router
@@ -15,5 +14,7 @@ $router->patch('/todo/{id:int}', [TodoController::class, 'complete']);
 $router->delete('/todo/{id:int}', [TodoController::class, 'delete']);
 $router->get(
     '/{*}',
-    static fn(string $path) => new HtmlResponse()->setStatus(ResponseStatus::NOT_FOUND)->setBody('Not found ' . $path)
+    static fn(string $path, ResponseBuilder $builder) => $builder->makeDefault()
+        ->setStatus(ResponseStatus::NOT_FOUND)
+        ->setBody('Not found ' . $path)
 );

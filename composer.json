@@ -3,8 +3,8 @@
   "description": "A minimal todo-list example app showcasing the Joke PHP microframework",
   "type": "project",
   "require": {
-    "php": "^8.4",
-    "voral/joke": "^1.1"
+    "php": "^8.5",
+    "voral/joke": "^2.0"
   },
   "license": "MIT",
   "autoload": {

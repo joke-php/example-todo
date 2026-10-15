@@ -2,9 +2,10 @@
 
 namespace App\Controllers;
 
-use Vasoft\Joke\Core\Middlewares\CsrfMiddleware;
-use Vasoft\Joke\Core\Request\HttpRequest;
-use Vasoft\Joke\Core\Response\HtmlResponse;
+
+use Vasoft\Joke\Http\Csrf\CsrfMiddleware;
+use Vasoft\Joke\Http\Csrf\CsrfTokenManager;
+use Vasoft\Joke\Http\HttpRequest;
 
 class TodoController
 {
@@ -14,15 +15,14 @@ class TodoController
     private bool $loaded = false;
 
 
-    public function index(HttpRequest $request): HtmlResponse
+    public function index(HttpRequest $request): string
     {
         $html = file_get_contents(self::INDEX_FILE);
-        $html = str_replace(
+        return str_replace(
             '#CSRF#',
-            $request->session->get(CsrfMiddleware::CSRF_TOKEN_NAME),
+            $request->session->get(CsrfTokenManager::CSRF_TOKEN_NAME),
             $html
         );
-        return new HtmlResponse()->setBody($html);
     }
 
     private function loadTodos(): void

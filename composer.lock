@@ -4,28 +4,34 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6418c2f244132f333d18a9fbc4eb5eec",
+    "content-hash": "594eff71052fd98476269e71b69fd01a",
     "packages": [
         {
             "name": "voral/joke",
-            "version": "1.1.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Voral/joke.git",
-                "reference": "e7e9531563ce4aff4cc5b704f6fbe914d1d6d438"
+                "url": "https://github.com/joke-php/joke.git",
+                "reference": "c0e002edebcc325261e709a80bed4144abb56aab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Voral/joke/zipball/e7e9531563ce4aff4cc5b704f6fbe914d1d6d438",
-                "reference": "e7e9531563ce4aff4cc5b704f6fbe914d1d6d438",
+                "url": "https://api.github.com/repos/joke-php/joke/zipball/c0e002edebcc325261e709a80bed4144abb56aab",
+                "reference": "c0e002edebcc325261e709a80bed4144abb56aab",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.4"
+                "ext-dom": "*",
+                "ext-iconv": "*",
+                "ext-libxml": "*",
+                "php": "^8.5"
             },
             "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.93",
                 "php-mock/php-mock-phpunit": "^2.14",
-                "phpunit/phpunit": "^12.5",
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpunit/phpunit": "^13.1.7",
                 "voral/version-increment": "^3.2"
             },
             "type": "library",
@@ -46,10 +52,10 @@
             ],
             "description": "A minimal PHP microframework with manual routing and dependency injection container.",
             "support": {
-                "issues": "https://github.com/Voral/joke/issues",
-                "source": "https://github.com/Voral/joke/tree/v1.1.0"
+                "issues": "https://github.com/joke-php/joke/issues",
+                "source": "https://github.com/joke-php/joke/tree/v2.0.0"
             },
-            "time": "2026-01-20T14:13:11+00:00"
+            "time": "2026-10-15T06:45:07+00:00"
         }
     ],
     "packages-dev": [],
@@ -59,8 +65,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.4"
+        "php": "^8.5"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }
